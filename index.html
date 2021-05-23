@@ -5,6 +5,29 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+<style>
+    {
+        box-sizing: border-box;
+    }
+    /* Set additional styling options for the columns */
+    .column {
+    float: left;
+    }
+
+    /* Set width length for the left, right and middle columns */
+    .left {
+    width: 15%;
+    }
+    .right {
+    width: 85%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    </style>
 	<head>
 		<title> </title>
 		<meta charset="utf-8" />
@@ -64,14 +87,27 @@
 									<h3>CV</h3>
 									<p> Detailed CV can be found <a href = "./pdfs/CV/CV_Galaudage_May2021.pdf">here</a> [Updated May 2021].</p>
 									<h4>Education</h4>
-									<p> PhD | Monash University | 2019 - present <br />
-									    Bachelor of Science Advanced – Research (Honours) | Monash University | 2015 - 2018
-									</p>
+									<div class="row">
+										<div class="column left" >
+											<p>2019 - present</p>
+										</div>
+										<div class="column right" >
+											<p>PhD | Monash University</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="column left" >
+											<p>2015 - 2018</p>
+										</div>
+										<div class="column right" >
+											<p>Bachelor of Science Advanced – Research (Honours)</p>
+										</div>
+									</div>
+									
 									<h4>Publications</h4>
-									<p> Galaudage, S., Adamcewicz, C., Zhu, X.-J., Stevenson, S. and Thrane, E. Heavy double neutron stars: birth, mid-life and death, ApJL 909 (2021) L19  <br />
-										Galaudage, S., Talbot, C. and Thrane, E. Gravitational-wave inference in the catalog era: evolving priors and marginal events, PRD 102 (2019) 083026  <br />
-										The LIGO Scientific Collaboration; the Virgo Collaboration, Population properties of compact objects from the second LIGO-Virgo Gravitational-Wave Transient Catalog Accepted ApJL (2020) <br />
-									</p>
+									<p> Galaudage, S., Adamcewicz, C., Zhu, X.-J., Stevenson, S. and Thrane, E. Heavy double neutron stars: birth, mid-life and death, ApJL 909 (2021) L19  </p>
+									<p> Galaudage, S., Talbot, C. and Thrane, E. Gravitational-wave inference in the catalog era: evolving priors and marginal events, PRD 102 (2019) 083026  </p>
+									<p> The LIGO Scientific Collaboration; the Virgo Collaboration, Population properties of compact objects from the second LIGO-Virgo Gravitational-Wave Transient Catalog Accepted ApJL (2020) </p>
 								</div>
 							</section>
 
@@ -99,7 +135,7 @@
 											<a href = "./pdfs/talks_posters/Poster_LVK_Mar2021.pdf" class="image"><img src="images/heavydns.png" alt="" /></a>
 											<div class="inner">
 												<h4>Collaboration meeting | LVK </h4>
-												<p>Attended the LIGO/Virgo/Kagra meeting and presented a poster on my research on heavy double neutron stars. Received an honourable mention for it!</p>
+												<p>Attended the LIGO/Virgo/Kagra meeting and presented a poster on my latest research paper about heavy double neutron stars. Received an honourable mention for it!</p>
 											</div>
 										</article>
 									</div>
