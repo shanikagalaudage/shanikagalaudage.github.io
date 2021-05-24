@@ -133,14 +133,26 @@ input, select, textarea {
 		margin: 0 0 1.25em 0;
 	}
 
-	h1, h2, h3, h4, h5, h6 {
+	h1, h2, h4, h5, h6 {
 		color: #777;
 		font-weight: 700;
 		line-height: 1em;
 		margin: 0 0 0.5625em 0;
 	}
 
-		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+		h1 a, h2 a, h4 a, h5 a, h6 a {
+			border: 0;
+			color: inherit;
+			text-decoration: none;
+		}
+	h3 {
+		color: #1c3763;
+		font-weight: 700;
+		line-height: 1em;
+		margin: 0 0 0.5625em 0;
+	}
+
+		h3 a {
 			border: 0;
 			color: inherit;
 			text-decoration: none;
@@ -2684,6 +2696,29 @@ input, select, textarea {
 			.features article .inner > :last-child {
 				margin-bottom: 0;
 			}
+	.features media {
+		border-top: solid 3px #f4f4f4;
+		margin-bottom: 2.25em;
+		padding-top: 2.25em;
+	}
+
+		.features media:first-child {
+			border-top: 0;
+			padding-top: 0;
+		}
+
+		.features media .image {
+			display: inline-block;
+			padding-right: 2.5em;
+			vertical-align: middle;
+			width: 100%;
+		}
+
+			.features media .image img {
+				display: block;
+				width: 100%;
+			}
+
 
 /* Header */
 
@@ -2752,7 +2787,6 @@ input, select, textarea {
 
 			#header > header p {
 				color: #edf2fa;
-				font-style: italic;
 				margin: 1em 0 0 0;
 			}
 
