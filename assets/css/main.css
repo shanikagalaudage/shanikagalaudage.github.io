@@ -139,6 +139,11 @@ input, select, textarea {
 		line-height: 1em;
 		margin: 0 0 0.5625em 0;
 	}
+	figcaption {
+		color: #2e4c80;
+		line-height: 1em;
+		font-size: 0.6em;
+	}
 
 		h1 a, h2 a, h4 a, h5 a, h6 a {
 			border: 0;
