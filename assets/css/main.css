@@ -141,8 +141,10 @@ input, select, textarea {
 	}
 	figcaption {
 		color: #2e4c80;
-		line-height: 1em;
-		font-size: 0.6em;
+		line-height: 2.0em;
+		font-size: 0.8em;
+                margin: 0.1em 0 1.5em 0;
+		font-weight: 525;
 	}
 
 		h1 a, h2 a, h4 a, h5 a, h6 a {
@@ -2714,7 +2716,7 @@ input, select, textarea {
 
 		.features media .image {
 			display: inline-block;
-			padding-right: 2.5em;
+			padding-right: 0em;
 			vertical-align: middle;
 			width: 100%;
 		}
