@@ -2846,12 +2846,15 @@ input, select, textarea {
 						padding: 0.85em 0;
 						text-decoration: none;
 					}
+					#header > nav ul li a:hover {
+					    background: #1c3763;
+					}
 
 						#header > nav ul li a.active {
 							background: #fff;
 							color: #222537 !important;
 						}
-
+					
 					#header > nav ul li:first-child {
 						border-top: 0;
 					}
