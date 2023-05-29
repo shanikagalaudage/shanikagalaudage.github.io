@@ -72,6 +72,7 @@ input, select, textarea {
 	appearance: none;
 }
 
+
 /* Basic */
 
 	html {
@@ -114,7 +115,15 @@ input, select, textarea {
 		color: inherit;
 		text-decoration: none;
 	}
+	
+	        a:link {
+	                color: #607696;
+	        }
 
+                a:visited {
+                        color: #607696;
+                }
+		
 		a:hover {
 			border-bottom-color: transparent;
 			color: #222537 !important;
@@ -254,6 +263,26 @@ input, select, textarea {
 	.align-right {
 		text-align: right;
 	}
+
+
+        .work-item {
+                margin: 0 0 2em 0;
+        }
+
+                .work-item .image {
+                        margin: 0 0 1.5em 0;
+                }
+
+                .work-item h3 {
+                        font-size: 1em;
+                        margin: 0 0 0.5em 0;
+		}
+
+                .work-item p {
+                        font-size: 0.8em;
+			line-height: 1.5em;
+                        margin: 0;
+                }
 
 /* Row */
 
@@ -2074,6 +2103,60 @@ input, select, textarea {
 		position: relative;
 	}
 
+		.image:before {
+			-moz-transition: opacity 0.2s ease-in-out;
+			-webkit-transition: opacity 0.2s ease-in-out;
+			-ms-transition: opacity 0.2s ease-in-out;
+			transition: opacity 0.2s ease-in-out;
+			background: url("images/overlay.png");
+			border-radius: 0.35em;
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			opacity: 0.5;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		.image.thumb {
+			text-align: center;
+		}
+
+			.image.thumb:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'View';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+
+			.image.thumb:hover:after {
+				opacity: 1.0;
+			}
+
+			.image.thumb:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+	
 		.image[data-position] img {
 			-moz-object-fit: cover;
 			-webkit-object-fit: cover;
@@ -2821,6 +2904,7 @@ input, select, textarea {
 			-webkit-flex-grow: 1;
 			-ms-flex-grow: 1;
 			flex-grow: 1;
+			font-size: 0.9em;
 		}
 
 			#header > nav ul {
@@ -2830,7 +2914,7 @@ input, select, textarea {
 			}
 
 				#header > nav ul li {
-					border-top: solid 2px #1c3763;
+					border-top: solid 1px #254578;
 					display: block;
 					padding: 0;
 				}
@@ -2843,11 +2927,11 @@ input, select, textarea {
 						border: 0;
 						color: #ffffff !important;
 						display: block;
-						padding: 0.85em 0;
+						padding: 0.55em 0;
 						text-decoration: none;
 					}
 					#header > nav ul li a:hover {
-					    background: #1c3763;
+					    background: #254578;
 					}
 
 						#header > nav ul li a.active {
