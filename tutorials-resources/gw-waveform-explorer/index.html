@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>waveform explorer</title>
+    <script type="module" crossorigin src="./assets/index-vG-gdKWq.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-DImqtvgl.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-BcIddLXZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-Cr9loedd.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-mwDPpfh_.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-D1FLsfmf.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-D6bRRS5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-DWHMUa0d.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-DEUt_IsG.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-Dm8s6sMr.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-ClCtr3_I.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-Zjtz1syG.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-1ZdxNBaX.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-CaU6_Jtx.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-Dc7YCRim.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-Di-JjADd.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-COQ6MvP7.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-BExEgq1M.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-ChUikXiI.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CerBk_un.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-CVFfFJm2.js">
+    <link rel="modulepreload" crossorigin href="./assets/jotai-BTnrNcC1.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-D5a0EE05.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-Dvc5opZF.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-BpjB6B-Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DD3OWR81.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-3GsqimLM.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-CnvLb18a.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-BWZ0PeaJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-3DIK_jNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-CBQfDRod.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CBqvgOfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-CCxgO0mJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-CxcKOiwY.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BPMVOfO3.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CEISdYm1.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-Mppm0cvJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-e9OVB2bJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-4lb_EYpq.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-BOd4SjWu.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-CsVOmbVi.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-CxNbfWnk.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-CL3DrH5R.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CEL4hxAo.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-C6dJ71nW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-o3-gJN-A.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DdXBxU_X.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dv7WCK3M.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-w3K5vvwl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DXPWGCwf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BOJjflZo.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-ws1ADWL0.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BGbJQ9FV.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-dCpey1ug.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-w1KpyykF.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-c4IQJQis.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-BXqTLlmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-BUM2losY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-DVCC-93H.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BB_RKOA5.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-CCaZmKLi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-DV6dfoCq.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-BfBY_QKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-a-3t8sis.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-itkPNnCe.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-Ba4wqcnv.js">
+    <link rel="modulepreload" crossorigin href="./assets/lazy-ijSQmhmN.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DEWTIUVh.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BLxyDkD7.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-B9-NA0ur.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-Cp1bHVeU.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-Yli91_uW.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-5_63wxX3.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-BZHeDuaE.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-CzmSXArA.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce--Sw2WRQ5.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-Dft9TKC1.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-CMB_HLxO.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BqH7Jigl.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BPGR7t2W.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-C2JVmCUi.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-DuVApvWu.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-ExH1h9et.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-Bp_0p3CR.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-B5fh2kMN.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-90C38wV6.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-BHcVA2dC.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-ZIgqDBQe.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-1oeuzoUk.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DV4IVFuG.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-RfubwhHM.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-DRRWXNT2.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DhuV6_de.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-BoRNi4dY.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-WnlQjiPG.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-SPzF4B1M.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CDDalEhv.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-Ckew1l1_.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-BK9SOQXS.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CmG1k0Cr.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-BBVeCFEd.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-Bj1zHGNd.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-CGHt3Blh.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BPaRR7vx.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-BLQ5-OdI.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-rdjPobI5.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Cit8Tr_y.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CJkb1R7C.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-Bxm1PGFP.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-CFczudfT.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-cpHLsM9S.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-FF_l0CN4.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-DrI1Gw05.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-DhnjMUSs.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-CjexKXdD.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CQ9jB95h.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-ZclXTdAh.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CmDieCGZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/Output-BNpy6qAs.js">
+    <link rel="modulepreload" crossorigin href="./assets/name-cell-input-VEOAxqMs.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-Ca6pS8sJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-CNyONSoo.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-C1NahKuy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-bbz7Slba.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Duhp104c.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CH5tSYom.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Zii08NWl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-C27NmZjJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DWvYBldG.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B309G_89.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-5c-fdIcP.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-COzB_eCZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BMfw4eeq.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Z76N9TEr.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-C3eCrV3K.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-3nYEuz31.js">
+    <link rel="modulepreload" crossorigin href="./assets/apl-DOdxvsp7.js">
+    <link rel="modulepreload" crossorigin href="./assets/asciiarmor-iHsvYBsh.js">
+    <link rel="modulepreload" crossorigin href="./assets/asn1-CjQdFpKC.js">
+    <link rel="modulepreload" crossorigin href="./assets/brainfuck-DtaPUQOb.js">
+    <link rel="modulepreload" crossorigin href="./assets/clike-CEj-3lIu.js">
+    <link rel="modulepreload" crossorigin href="./assets/clojure-BoRNIjWi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cmake-BDPy65SJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/cobol-B1NZRKFh.js">
+    <link rel="modulepreload" crossorigin href="./assets/coffeescript-C6u-3CUG.js">
+    <link rel="modulepreload" crossorigin href="./assets/commonlisp-PnS0RzOo.js">
+    <link rel="modulepreload" crossorigin href="./assets/crystal-CmwgoX1x.js">
+    <link rel="modulepreload" crossorigin href="./assets/css-BOMeM4Jz.js">
+    <link rel="modulepreload" crossorigin href="./assets/cypher-BNcNWKra.js">
+    <link rel="modulepreload" crossorigin href="./assets/d-BMO4C4Kr.js">
+    <link rel="modulepreload" crossorigin href="./assets/diff-pLFk18zx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dtd-Cufzm3tN.js">
+    <link rel="modulepreload" crossorigin href="./assets/dylan-CohSy5uK.js">
+    <link rel="modulepreload" crossorigin href="./assets/ecl-BhEt80nJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/eiffel-CKJVLfM7.js">
+    <link rel="modulepreload" crossorigin href="./assets/elm-ClkLCCoU.js">
+    <link rel="modulepreload" crossorigin href="./assets/erlang-D2TH4-Et.js">
+    <link rel="modulepreload" crossorigin href="./assets/simple-mode-CXCwEnyS.js">
+    <link rel="modulepreload" crossorigin href="./assets/factor-6NmCZvh-.js">
+    <link rel="modulepreload" crossorigin href="./assets/forth-DV7ZwZS0.js">
+    <link rel="modulepreload" crossorigin href="./assets/fortran-C9_PuY2l.js">
+    <link rel="modulepreload" crossorigin href="./assets/gas-CGuyKmgF.js">
+    <link rel="modulepreload" crossorigin href="./assets/gherkin-BwmPTL6e.js">
+    <link rel="modulepreload" crossorigin href="./assets/groovy-DJxiqoVo.js">
+    <link rel="modulepreload" crossorigin href="./assets/haskell-DOcPZqkO.js">
+    <link rel="modulepreload" crossorigin href="./assets/haxe-BVSsVSdX.js">
+    <link rel="modulepreload" crossorigin href="./assets/idl-D5drHePd.js">
+    <link rel="modulepreload" crossorigin href="./assets/javascript-rI4fd75W.js">
+    <link rel="modulepreload" crossorigin href="./assets/jinja2-BrZGqXAx.js">
+    <link rel="modulepreload" crossorigin href="./assets/julia-z0xq3uqV.js">
+    <link rel="modulepreload" crossorigin href="./assets/livescript-BbVvVfSY.js">
+    <link rel="modulepreload" crossorigin href="./assets/lua-CtEmKXsU.js">
+    <link rel="modulepreload" crossorigin href="./assets/mathematica-B-SjlQIm.js">
+    <link rel="modulepreload" crossorigin href="./assets/mbox-BdnWvTJv.js">
+    <link rel="modulepreload" crossorigin href="./assets/mirc-Cyycx3am.js">
+    <link rel="modulepreload" crossorigin href="./assets/mllike-ZkoLEmrh.js">
+    <link rel="modulepreload" crossorigin href="./assets/modelica-DIZcE54y.js">
+    <link rel="modulepreload" crossorigin href="./assets/mscgen-MISBZbzR.js">
+    <link rel="modulepreload" crossorigin href="./assets/mumps-Cnu1tNUa.js">
+    <link rel="modulepreload" crossorigin href="./assets/nsis-CUebodQn.js">
+    <link rel="modulepreload" crossorigin href="./assets/ntriples-2rre165b.js">
+    <link rel="modulepreload" crossorigin href="./assets/octave-C7u5CeUZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/oz-D5aE2uST.js">
+    <link rel="modulepreload" crossorigin href="./assets/pascal-DTApZM3o.js">
+    <link rel="modulepreload" crossorigin href="./assets/perl-Ckgh9LJK.js">
+    <link rel="modulepreload" crossorigin href="./assets/pig-jAl9a1Kh.js">
+    <link rel="modulepreload" crossorigin href="./assets/powershell-C_IKzlOl.js">
+    <link rel="modulepreload" crossorigin href="./assets/properties-BdVxDpDJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/protobuf-DLu_SUI6.js">
+    <link rel="modulepreload" crossorigin href="./assets/pug-fgP-dIQ4.js">
+    <link rel="modulepreload" crossorigin href="./assets/puppet-CShRizHW.js">
+    <link rel="modulepreload" crossorigin href="./assets/python-ChTwa-ru.js">
+    <link rel="modulepreload" crossorigin href="./assets/q-D2OTJZH4.js">
+    <link rel="modulepreload" crossorigin href="./assets/r-DRqIAgj1.js">
+    <link rel="modulepreload" crossorigin href="./assets/rpm-BStFD27m.js">
+    <link rel="modulepreload" crossorigin href="./assets/ruby-C37hkPS4.js">
+    <link rel="modulepreload" crossorigin href="./assets/sas-CCEIl8BG.js">
+    <link rel="modulepreload" crossorigin href="./assets/scheme-B0jflgrk.js">
+    <link rel="modulepreload" crossorigin href="./assets/shell-Cq7B0hFW.js">
+    <link rel="modulepreload" crossorigin href="./assets/sieve-DS0lS4kt.js">
+    <link rel="modulepreload" crossorigin href="./assets/smalltalk-HHM53Uii.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparql-BMqtnWzI.js">
+    <link rel="modulepreload" crossorigin href="./assets/stylus-Br2gMpMI.js">
+    <link rel="modulepreload" crossorigin href="./assets/swift-BJ8qi_zI.js">
+    <link rel="modulepreload" crossorigin href="./assets/tcl-D0knbOX7.js">
+    <link rel="modulepreload" crossorigin href="./assets/textile-DrRQSuh3.js">
+    <link rel="modulepreload" crossorigin href="./assets/toml-C2kDGfZi.js">
+    <link rel="modulepreload" crossorigin href="./assets/troff-2dFxqWQa.js">
+    <link rel="modulepreload" crossorigin href="./assets/ttcn-cfg-CBXajWEo.js">
+    <link rel="modulepreload" crossorigin href="./assets/ttcn-Cj4sIofh.js">
+    <link rel="modulepreload" crossorigin href="./assets/turtle-CDdPtp5F.js">
+    <link rel="modulepreload" crossorigin href="./assets/vb-CtEhAMYU.js">
+    <link rel="modulepreload" crossorigin href="./assets/vbscript-B0nzdgzL.js">
+    <link rel="modulepreload" crossorigin href="./assets/velocity-DR7TSall.js">
+    <link rel="modulepreload" crossorigin href="./assets/verilog-MmKxT9bW.js">
+    <link rel="modulepreload" crossorigin href="./assets/vhdl-0jJrpQNA.js">
+    <link rel="modulepreload" crossorigin href="./assets/webidl-D9f20BkN.js">
+    <link rel="modulepreload" crossorigin href="./assets/xquery-B0eSGN9q.js">
+    <link rel="modulepreload" crossorigin href="./assets/yacas-BS613OH9.js">
+    <link rel="modulepreload" crossorigin href="./assets/z80-CJYC52xh.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-DXHMyc8g.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-DpmcvlCC.js">
+    <link rel="modulepreload" crossorigin href="./assets/ConsoleOutput-CcWTsPJI.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-HGhpVPVr.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-pmcK06GU.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-B96v6VlX.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-DF_F9Sqz.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-C2nGNVra.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-DncO0xCM.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-Cdxt7KQF.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus--Piy3rX5.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-B1IBfLxp.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BavQbx6K.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-Ig4Te4YX.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-CPnmDQd7.js">
+    <link rel="modulepreload" crossorigin href="./assets/api-qc-D7yz9.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-Bcw0dX52.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-Bur20myQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-I8SxGjN9.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-DhF8x4Aa.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-16owuO_q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-L2qemYhz.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-SfrtJjbv.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-CgxonLQ-.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-BIDUS-iw.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-DWAWtOBJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-ChK3PfU6.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-gcIrLbdD.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-Z92DzmMA.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-Cesos4Qp.js">
+    <link rel="modulepreload" crossorigin href="./assets/types--mPsPGF4.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-FIGQlkj5.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-Cdn744fY.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-DA_SbCD5.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-Bb-EcEyG.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-ETV_gv20.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-D1jEfGpj.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-q5HZfP0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-mNGJv_67.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-p-zRh0zu.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-CG31RE8p.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-DkEGS3Wg.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-De4wCXx1.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-B_LGU134.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-BAY7nW8B.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-CM14OBji.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-B9I0t9He.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-ViL-mfkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BUGWIXZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-BgJKauE7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-CSDa7ReR.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BQzWKfma.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-B9bfYM_2.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-kgdScOCd.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-BGR7PZfb.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-C0pANzAH.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DKt4M-wV.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-DvMaGwYY.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-Bah18HX6.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/Output-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/ConsoleOutput-BFFTcC5Y.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-BmcO-QYJ.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.6%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20math%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%0A%20%20%20%20plt.rcParams.update(%7B%0A%20%20%20%20%20%20%20%20%22font.family%22%3A%20%22serif%22%2C%0A%20%20%20%20%20%20%20%20%22font.serif%22%3A%20%5B%22Computer%20Modern%22%2C%20%22CMU%20Serif%22%2C%20%22DejaVu%20Serif%22%5D%2C%0A%20%20%20%20%20%20%20%20%22font.size%22%3A%209.0%2C%0A%20%20%20%20%20%20%20%20%22mathtext.fontset%22%3A%20%22cm%22%2C%0A%20%20%20%20%20%20%20%20%22axes.formatter.use_mathtext%22%3A%20False%2C%0A%20%20%20%20%20%20%20%20%22axes.labelsize%22%3A%2011%2C%0A%20%20%20%20%20%20%20%20%22axes.titlesize%22%3A%2011%2C%0A%20%20%20%20%20%20%20%20%22axes.labelpad%22%3A%203.0%2C%0A%20%20%20%20%20%20%20%20%22axes.grid%22%3A%20True%2C%0A%20%20%20%20%20%20%20%20%22grid.color%22%3A%20%22black%22%2C%0A%20%20%20%20%20%20%20%20%22grid.linestyle%22%3A%20(0%2C%20(1%2C%204))%2C%0A%20%20%20%20%20%20%20%20%22grid.linewidth%22%3A%200.55%2C%0A%20%20%20%20%20%20%20%20%22grid.alpha%22%3A%200.4%2C%0A%20%20%20%20%20%20%20%20%22figure.subplot.left%22%3A%200.17%2C%0A%20%20%20%20%20%20%20%20%22figure.subplot.right%22%3A%200.97%2C%0A%20%20%20%20%20%20%20%20%22figure.subplot.bottom%22%3A%200.14%2C%0A%20%20%20%20%20%20%20%20%22figure.subplot.top%22%3A%200.98%2C%0A%20%20%20%20%20%20%20%20%22legend.frameon%22%3A%20True%2C%0A%20%20%20%20%20%20%20%20%22legend.framealpha%22%3A%200.75%2C%0A%20%20%20%20%20%20%20%20%22legend.edgecolor%22%3A%20%22none%22%2C%0A%20%20%20%20%20%20%20%20%22legend.borderpad%22%3A%200.15%2C%0A%20%20%20%20%20%20%20%20%22legend.labelspacing%22%3A%200.3%2C%0A%20%20%20%20%20%20%20%20%22legend.handletextpad%22%3A%200.5%2C%0A%20%20%20%20%20%20%20%20%22legend.handlelength%22%3A%201.6%2C%0A%20%20%20%20%20%20%20%20%22legend.handleheight%22%3A%200.25%2C%0A%20%20%20%20%20%20%20%20%22legend.fontsize%22%3A%209%2C%0A%20%20%20%20%20%20%20%20%22lines.linewidth%22%3A%201.0%2C%0A%20%20%20%20%20%20%20%20%22xtick.major.pad%22%3A%204%2C%0A%20%20%20%20%20%20%20%20%22ytick.major.pad%22%3A%202.5%2C%0A%20%20%20%20%20%20%20%20%22xtick.labelsize%22%3A%2010%2C%0A%20%20%20%20%20%20%20%20%22ytick.labelsize%22%3A%2010%2C%0A%20%20%20%20%20%20%20%20%22xtick.major.size%22%3A%203.0%2C%0A%20%20%20%20%20%20%20%20%22ytick.major.size%22%3A%203.0%2C%0A%20%20%20%20%20%20%20%20%22xtick.minor.size%22%3A%201.5%2C%0A%20%20%20%20%20%20%20%20%22ytick.minor.size%22%3A%201.5%2C%0A%20%20%20%20%20%20%20%20%22xtick.direction%22%3A%20%22in%22%2C%0A%20%20%20%20%20%20%20%20%22ytick.direction%22%3A%20%22in%22%2C%0A%20%20%20%20%20%20%20%20%22savefig.dpi%22%3A150%2C%0A%20%20%20%20%7D)%0A%20%20%20%20return%20math%2C%20mo%2C%20np%2C%20plt%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20%23%20Physical%20constants%20(SI)%0A%20%20%20%20G%20%3D%206.674e-11%0A%20%20%20%20c%20%3D%202.998e8%0A%20%20%20%20Msun%20%3D%201.989e30%0A%20%20%20%20Mpc%20%3D%203.086e22%0A%20%20%20%20tM%20%3D%20G%20*%20Msun%20%2F%20c**3%20%20%20%20%20%20%20%20%20%20%20%20%23%20geometric%20time%20per%20solar%20mass%20%5Bs%5D%0A%0A%20%20%20%20%23%20----%20FIXED%20PLOT%20FRAME%20(edit%20to%20reframe%20a%20particular%20demo)%20-------------%0A%20%20%20%20T_BEFORE%20%3D%200.5%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20seconds%20of%20inspiral%20shown%20before%20merger%0A%20%20%20%20T_AFTER%20%3D%200.05%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20sliver%20kept%20for%20the%20strain%20ring-down%20only%0A%20%20%20%20YLIM_STRAIN%20%3D%203.5%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20strain%20axis%20half-range%2C%20in%20units%20of%201e-21%0A%20%20%20%20YLIM_FREQ%20%3D%20400.0%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20frequency%20axis%20top%20%5BHz%5D%20(raise%20for%20high%20spin)%0A%20%20%20%20F_LOW%20%3D%2020.0%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20detector%20low-frequency%20sensitivity%20%5BHz%5D%0A%20%20%20%20N%20%3D%2040000%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20max%20inspiral%20integration%20steps%20(safety%20cap)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20F_LOW%2C%0A%20%20%20%20%20%20%20%20G%2C%0A%20%20%20%20%20%20%20%20Mpc%2C%0A%20%20%20%20%20%20%20%20Msun%2C%0A%20%20%20%20%20%20%20%20N%2C%0A%20%20%20%20%20%20%20%20T_AFTER%2C%0A%20%20%20%20%20%20%20%20T_BEFORE%2C%0A%20%20%20%20%20%20%20%20YLIM_FREQ%2C%0A%20%20%20%20%20%20%20%20YLIM_STRAIN%2C%0A%20%20%20%20%20%20%20%20c%2C%0A%20%20%20%20%20%20%20%20tM%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(G%2C%20Mpc%2C%20Msun%2C%20N%2C%20T_AFTER%2C%20T_BEFORE%2C%20c%2C%20math%2C%20np%2C%20tM)%3A%0A%20%20%20%20def%20build_waveform(m1%2C%20m2%2C%20dist_mpc%2C%20nterms%2C%20chi_eff%2C%20chi_p%2C%20sigma_ss)%3A%0A%20%20%20%20%20%20%20%20%22%22%222PN%20inspiral%20(spin-orbit%20%2B%20spin-spin)%20%2B%20schematic%20QNM%20ring-down%2C%0A%20%20%20%20%20%20%20%20with%20a%20schematic%20spin-precession%20modulation%20of%20the%20strain.%0A%0A%20%20%20%20%20%20%20%20The%20two%20black-hole%20spins%20are%20collapsed%20into%20the%20combinations%20the%0A%20%20%20%20%20%20%20%20waveform%20responds%20to%2C%20computed%20by%20spin_params()%20from%20the%20component%0A%20%20%20%20%20%20%20%20spins%3A%0A%20%20%20%20%20%20%20%20%20%20chi_eff%20%20(aligned)%20drives%20the%201.5PN%20spin-orbit%20hang-up%2C%20the%20Kerr%20ISCO%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frequency%20and%20the%20remnant%20spin%20(QNM)%3B%0A%20%20%20%20%20%20%20%20%20%20sigma_ss%20(2PN%20spin-spin%20coefficient)%20is%20computed%20from%20the%20component%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20spins%20and%20passed%20in%3B%0A%20%20%20%20%20%20%20%20%20%20chi_p%20%20%20%20(in-plane%20precession%20spin%2C%200..2)%20drives%20the%20precession%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20modulation%20of%20the%20strain%2C%20strongest%20near%20merger.%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20M%20%3D%20m1%20%2B%20m2%0A%20%20%20%20%20%20%20%20eta%20%3D%20m1%20*%20m2%20%2F%20M**2%0A%20%20%20%20%20%20%20%20Mc%20%3D%20(m1%20*%20m2)%20**%200.6%20%2F%20M**0.2%0A%20%20%20%20%20%20%20%20Mkg%2C%20Mckg%2C%20D%20%3D%20M%20*%20Msun%2C%20Mc%20*%20Msun%2C%20dist_mpc%20*%20Mpc%0A%0A%20%20%20%20%20%20%20%20chi_eff%20%3D%20float(min(max(chi_eff%2C%20-0.99)%2C%200.99))%0A%20%20%20%20%20%20%20%20chi_p%20%3D%20float(min(max(chi_p%2C%200.0)%2C%202.0))%0A%0A%20%20%20%20%20%20%20%20%23%20---%20spin-dependent%20ISCO%3A%20Kerr%20equatorial%20formula%2C%20a%20%3D%20chi_eff%20--------%0A%20%20%20%20%20%20%20%20a%20%3D%20min(max(chi_eff%2C%20-0.999)%2C%200.999)%0A%20%20%20%20%20%20%20%20amag%20%3D%20abs(a)%0A%20%20%20%20%20%20%20%20sdir%20%3D%201.0%20if%20a%20%3E%3D%200%20else%20-1.0%20%20%20%20%20%20%20%20%20%20%23%20%2B1%20prograde%2C%20-1%20retrograde%0A%20%20%20%20%20%20%20%20Z1%20%3D%201%20%2B%20(1%20-%20amag**2)%20**%20(1%20%2F%203)%20*%20((1%20%2B%20amag)%20**%20(1%20%2F%203)%20%2B%20(1%20-%20amag)%20**%20(1%20%2F%203))%0A%20%20%20%20%20%20%20%20Z2%20%3D%20math.sqrt(3%20*%20amag**2%20%2B%20Z1**2)%0A%20%20%20%20%20%20%20%20r_isco%20%3D%203%20%2B%20Z2%20-%20sdir%20*%20math.sqrt((3%20-%20Z1)%20*%20(3%20%2B%20Z1%20%2B%202%20*%20Z2))%0A%20%20%20%20%20%20%20%20f_isco%20%3D%20c**3%20%2F%20(math.pi%20*%20G%20*%20Mkg)%20%2F%20(r_isco**1.5%20%2B%20sdir%20*%20amag)%20%20%20%23%20GW%20Hz%0A%0A%20%20%20%20%20%20%20%20%23%20---%20PN%20coefficients%20of%20dF%2Fdt%20(Poisson%20%26%20Will%201995%3B%20note%20the%20%2Bsigma)%20---%0A%20%20%20%20%20%20%20%20%23%20beta%20%20%3D%20spin-orbit%20(1.5PN)%2C%20depends%20only%20on%20the%20ALIGNED%20spin%20(chi_eff).%0A%20%20%20%20%20%20%20%20%23%20sigma%20%3D%20spin-spin%20%20(2PN)%3A%20computed%20by%20spin_params()%20from%20the%20component%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20%20%20%20%20spins%20as%20eta%2F48%20(474%20chi1%7C%7C%20chi2%7C%7C%20%20-%20%20247%20chi1_perp%20chi2_perp)%2C%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20%20%20%20%20and%20passed%20in%20as%20sigma_ss.%0A%20%20%20%20%20%20%20%20beta_so%20%3D%20(113%20-%2076%20*%20eta)%20%2F%2012%20*%20chi_eff%0A%20%20%20%20%20%20%20%20b1%20%3D%20-(743%20%2F%20336%20%2B%2011%20%2F%204%20*%20eta)%0A%20%20%20%20%20%20%20%20b15%20%3D%204%20*%20math.pi%20-%20beta_so%0A%20%20%20%20%20%20%20%20b2%20%3D%20(34103%20%2F%2018144%20%2B%2013661%20%2F%202016%20*%20eta%20%2B%2059%20%2F%2018%20*%20eta**2)%20%2B%20sigma_ss%0A%20%20%20%20%20%20%20%20K%20%3D%20(96%20%2F%205)%20*%20math.pi%20**%20(8%20%2F%203)%20*%20(G%20*%20Mckg%20%2F%20c**3)%20**%20(5%20%2F%203)%0A%20%20%20%20%20%20%20%20P%20%3D%20(math.pi%20*%20G%20*%20Mkg%20%2F%20c**3)%20**%20(2%20%2F%203)%0A%0A%20%20%20%20%20%20%20%20def%20dFdt(f)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20x%20%3D%20P%20*%20f%20**%20(2%20%2F%203)%0A%20%20%20%20%20%20%20%20%20%20%20%20br%20%3D%201.0%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20nterms%20%3E%3D%202%3A%20br%20%2B%3D%20b1%20*%20x%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20nterms%20%3E%3D%203%3A%20br%20%2B%3D%20b15%20*%20x%20**%201.5%20%20%20%20%20%20%23%20spin-orbit%20lives%20here%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20nterms%20%3E%3D%204%3A%20br%20%2B%3D%20b2%20*%20x%20**%202%20%20%20%20%20%20%20%20%20%23%20spin-spin%20lives%20here%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20K%20*%20f%20**%20(11%20%2F%203)%20*%20max(br%2C%201e-3)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20inspiral%3A%20integrate%20BACKWARD%20from%20ISCO%20over%20the%20T_BEFORE%20window%2C%0A%20%20%20%20%20%20%20%20%23%20%20%20%20%20step%20chosen%20so%20~25%20samples%2Fcycle%20near%20merger%2C%20capped%20far%20out%20-----%0A%20%20%20%20%20%20%20%20spc%2C%20dt_min%2C%20dt_max%20%3D%2025.0%2C%202e-4%2C%200.02%0A%20%20%20%20%20%20%20%20t%2C%20f%20%3D%200.0%2C%20f_isco%0A%20%20%20%20%20%20%20%20tt%2C%20ff%20%3D%20%5B0.0%5D%2C%20%5Bf_isco%5D%0A%20%20%20%20%20%20%20%20it%2C%20it_max%20%3D%200%2C%20int(N)%0A%20%20%20%20%20%20%20%20while%20t%20%3E%20-T_BEFORE%20and%20it%20%3C%20it_max%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20dt%20%3D%20min(max(1.0%20%2F%20(spc%20*%20f)%2C%20dt_min)%2C%20dt_max)%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20t%20-%20dt%20%3C%20-T_BEFORE%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20dt%20%3D%20t%20%2B%20T_BEFORE%0A%20%20%20%20%20%20%20%20%20%20%20%20k1%20%3D%20dFdt(f)%0A%20%20%20%20%20%20%20%20%20%20%20%20k2%20%3D%20dFdt(max(f%20-%200.5%20*%20dt%20*%20k1%2C%201e-3))%0A%20%20%20%20%20%20%20%20%20%20%20%20k3%20%3D%20dFdt(max(f%20-%200.5%20*%20dt%20*%20k2%2C%201e-3))%0A%20%20%20%20%20%20%20%20%20%20%20%20k4%20%3D%20dFdt(max(f%20-%20dt%20*%20k3%2C%201e-3))%0A%20%20%20%20%20%20%20%20%20%20%20%20f%20%3D%20max(f%20-%20dt%20%2F%206%20*%20(k1%20%2B%202%20*%20k2%20%2B%202%20*%20k3%20%2B%20k4)%2C%200.2)%0A%20%20%20%20%20%20%20%20%20%20%20%20t%20-%3D%20dt%0A%20%20%20%20%20%20%20%20%20%20%20%20it%20%2B%3D%201%0A%20%20%20%20%20%20%20%20%20%20%20%20tt.append(t)%0A%20%20%20%20%20%20%20%20%20%20%20%20ff.append(f)%0A%20%20%20%20%20%20%20%20tin%20%3D%20np.array(tt%5B%3A%3A-1%5D)%0A%20%20%20%20%20%20%20%20Fin%20%3D%20np.array(ff%5B%3A%3A-1%5D)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20remnant%20%2B%20(2%2C2%2C0)%20QNM%20(spin-dependent%20fits)%20----------------------%0A%20%20%20%20%20%20%20%20a_f%20%3D%20chi_eff%20*%20(1%20-%202%20*%20eta)%20%2B%20(2%20*%20np.sqrt(3)%20*%20eta%20-%203.454%20*%20eta**2%20%2B%202.353%20*%20eta**3)%0A%20%20%20%20%20%20%20%20a_f%20%3D%20float(min(max(a_f%2C%20-0.998)%2C%200.998))%0A%20%20%20%20%20%20%20%20Mf%20%3D%20M%20*%20(1%20-%200.2%20*%20eta)%0A%20%20%20%20%20%20%20%20Mfs%20%3D%20Mf%20*%20tM%0A%20%20%20%20%20%20%20%20f_qnm%20%3D%20(1.5251%20-%201.1568%20*%20(1%20-%20a_f)%20**%200.1292)%20%2F%20Mfs%20%2F%20(2%20*%20np.pi)%0A%20%20%20%20%20%20%20%20Q%20%3D%200.7000%20%2B%201.4187%20*%20(1%20-%20a_f)%20**%20(-0.4990)%0A%20%20%20%20%20%20%20%20tau%20%3D%20Q%20%2F%20(np.pi%20*%20f_qnm)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20schematic%20merger-%3Ering-down%3A%20STRAIN%20ONLY%20(never%20on%20the%20f-t%20plot)%20--%0A%20%20%20%20%20%20%20%20tr%20%3D%20np.linspace(0%2C%20T_AFTER%2C%20401)%5B1%3A%5D%0A%20%20%20%20%20%20%20%20Fr%20%3D%20f_qnm%20-%20(f_qnm%20-%20f_isco)%20*%20np.exp(-tr%20%2F%20(2%20*%20tau))%0A%20%20%20%20%20%20%20%20t_all%20%3D%20np.concatenate(%5Btin%2C%20tr%5D)%0A%20%20%20%20%20%20%20%20F_all%20%3D%20np.concatenate(%5BFin%2C%20Fr%5D)%0A%20%20%20%20%20%20%20%20Ain%20%3D%204%20*%20(G%20*%20Mckg%20%2F%20c**2)%20**%20(5%20%2F%203)%20*%20(np.pi%20*%20Fin%20%2F%20c)%20**%20(2%20%2F%203)%20%2F%20D%0A%20%20%20%20%20%20%20%20A%20%3D%20np.concatenate(%5BAin%2C%20Ain%5B-1%5D%20*%20np.exp(-tr%20%2F%20tau)%5D)%0A%20%20%20%20%20%20%20%20phase%20%3D%202%20*%20np.pi%20*%20np.concatenate(%0A%20%20%20%20%20%20%20%20%20%20%20%20%5B%5B0%5D%2C%20np.cumsum(0.5%20*%20(F_all%5B1%3A%5D%20%2B%20F_all%5B%3A-1%5D)%20*%20np.diff(t_all))%5D%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20%23%20---%20SPIN-PRECESSION%20MODULATION%20(schematic%20simple-precession)%20---------%0A%20%20%20%20%20%20%20%20%23%20In-plane%20spin%20(chi_p)%20tilts%20the%20orbital%20plane%20off%20J%3B%20L%20precesses%20about%0A%20%20%20%20%20%20%20%20%23%20J%20and%20modulates%20the%20observed%20amplitude%2Fphase.%20The%20precession%20cone%20opens%0A%20%20%20%20%20%20%20%20%23%20up%20as%20the%20orbital%20angular%20momentum%20L%20~%20eta%2Fv%20shrinks%20toward%20S%20near%0A%20%20%20%20%20%20%20%20%23%20merger%2C%20so%20the%20modulation%20deepens%20into%20the%20chirp.%20Vanishes%20for%20chi_p%3D0.%0A%20%20%20%20%20%20%20%20v%20%3D%20(np.pi%20*%20(M%20*%20tM)%20*%20np.maximum(F_all%2C%201e-3))%20**%20(1%20%2F%203)%20%20%20%23%20PN%20velocity%0A%20%20%20%20%20%20%20%20L_over%20%3D%20eta%20%2F%20np.maximum(v%2C%201e-3)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20L%20%2F%20M%5E2%20(leading)%0A%20%20%20%20%20%20%20%20S_par%20%3D%20chi_eff%20*%20(1%20-%202%20*%20eta)%0A%20%20%20%20%20%20%20%20S_perp%20%3D%20chi_p%20*%20(1%20-%202%20*%20eta)%0A%20%20%20%20%20%20%20%20J_par%20%3D%20L_over%20%2B%20S_par%0A%20%20%20%20%20%20%20%20sin_LJ%20%3D%20abs(S_perp)%20%2F%20np.sqrt(J_par**2%20%2B%20S_perp**2%20%2B%201e-12)%20%20%23%20opening%20angle%0A%20%20%20%20%20%20%20%20theta_LJ%20%3D%20np.arcsin(np.clip(sin_LJ%2C%200.0%2C%201.0))%0A%20%20%20%20%20%20%20%20c_pr%20%3D%202.0%20%2B%201.5%20*%20(min(m1%2C%20m2)%20%2F%20max(m1%2C%20m2))%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20precession%20rate%20scale%0A%20%20%20%20%20%20%20%20Omega_p%20%3D%20np.where(t_all%20%3C%3D%200.0%2C%20c_pr%20*%20(np.pi%20*%20F_all)%20*%20v**2%2C%200.0)%0A%20%20%20%20%20%20%20%20alpha%20%3D%20np.concatenate(%5B%5B0%5D%2C%20np.cumsum(0.5%20*%20(Omega_p%5B1%3A%5D%20%2B%20Omega_p%5B%3A-1%5D)%20*%20np.diff(t_all))%5D)%0A%20%20%20%20%20%20%20%20amp_mod%20%3D%201.0%20%2B%200.5%20*%20sin_LJ**2%20*%20np.cos(2%20*%20alpha)%20%20%20%20%20%20%20%20%20%20%20%23%20symmetric%20about%201%0A%20%20%20%20%20%20%20%20dphi%20%3D%200.3%20*%20theta_LJ%20*%20np.sin(alpha)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20gentle%20phase%20wobble%0A%20%20%20%20%20%20%20%20env%20%3D%20A%20*%20amp_mod%0A%20%20%20%20%20%20%20%20h%20%3D%20env%20*%20np.cos(phase%20%2B%20dphi)%0A%20%20%20%20%20%20%20%20n_prec%20%3D%20float(alpha%5Blen(tin)%20-%201%5D%20%2F%20(2%20*%20np.pi))%20if%20chi_p%20%3E%201e-3%20else%200.0%0A%0A%20%20%20%20%20%20%20%20return%20dict(t%3Dt_all%2C%20F%3DF_all%2C%20h%3Dh%2C%20env%3Denv%2C%20tin%3Dtin%2C%20Fin%3DFin%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20f_isco%3Df_isco%2C%20f_qnm%3Df_qnm%2C%20tau%3Dtau%2C%20Mf%3DMf%2C%20a_f%3Da_f%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Mc%3DMc%2C%20M%3DM%2C%20eta%3Deta%2C%20chi_eff%3Dchi_eff%2C%20chi_p%3Dchi_p%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sigma%3Dsigma_ss%2C%20beta%3Dbeta_so%2C%20n_prec%3Dn_prec)%0A%20%20%20%20return%20(build_waveform%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20The%20gravitational-wave%20chirp%2C%20and%20what%20its%20parameters%20do%0A%0A%20%20%20%20When%20two%20compact%20objects%20spiral%20together%2C%20the%20gravitational-wave%20frequency%0A%20%20%20%20**sweeps%20upward**%3A%20the%20*chirp*.%20Different%20properties%20of%20the%20binary%20leave%0A%20%20%20%20different%20fingerprints%20on%20that%20sweep.%20This%20notebook%20builds%20up%2C%20section%20by%0A%20%20%20%20section%2C%20**which%20parameters%20matter%20and%20why**%2C%20and%20then%20lets%20you%20move%20them.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20---%0A%20%20%20%20%23%23%201.%20The%20chirp%20equation%0A%0A%20%20%20%20The%20inspiral%20frequency%20sweep%20is%20a%20**post-Newtonian%20(PN)**%20series%20in%20the%20small%0A%20%20%20%20parameter%0A%0A%20%20%20%20%24%24%0A%20%20%20%20v%3D%5Cleft(%5Cfrac%7B%5Cpi%20G%20M%20f_%7B%5Crm%20GW%7D%7D%7Bc%5E%7B3%7D%7D%5Cright)%5E%7B1%2F3%7D%0A%20%20%20%20%5Cqquad%5Ctext%7B(essentially%20the%20orbital%20speed%20in%20units%20of%20%7Dc%5Ctext%7B)%7D%20%2C%0A%20%20%20%20%24%24%0A%0A%20%20%20%20where%20%24M%3Dm_1%2Bm_2%24.%20To%20second%20post-Newtonian%20(2PN)%20order%20the%20sweep%20is%0A%20%20%20%20(Poisson%20%26%20Will%201995)%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cfrac%7B%5Cdot%20f%7D%7Bf%7D%0A%20%20%20%20%3D%5Cfrac%7B96%7D%7B5%7D%5C%2C%5Cmathcal%7BM%7D%5E%7B-1%7D(%5Cpi%5Cmathcal%7BM%7Df)%5E%7B8%2F3%7D%0A%20%20%20%20%5CBig%5B%5C%3B%0A%20%20%20%20%5Cunderbrace%7B1%5Cvphantom%7B%5Ctfrac11%7D%7D_%7B%5Ctext%7BTerm%201%7D%7D%0A%20%20%20%20-%5Cunderbrace%7B%5CBig(%5Ctfrac%7B743%7D%7B336%7D%2B%5Ctfrac%7B11%7D%7B4%7D%5Ceta%5CBig)v%5E%7B2%7D%7D_%7B%5Ctext%7BTerm%202%7D%7D%0A%20%20%20%20%2B%5Cunderbrace%7B%5Cbig(4%5Cpi-%5Cbeta%5Cbig)v%5E%7B3%7D%7D_%7B%5Ctext%7BTerm%203%7D%7D%0A%20%20%20%20%2B%5Cunderbrace%7B%5CBig(%5Ctfrac%7B34103%7D%7B18144%7D%2B%5Ctfrac%7B13661%7D%7B2016%7D%5Ceta%2B%5Ctfrac%7B59%7D%7B18%7D%5Ceta%5E%7B2%7D%2B%5Csigma%5CBig)v%5E%7B4%7D%7D_%7B%5Ctext%7BTerm%204%7D%7D%0A%20%20%20%20%2B%5Cdots%5CBig%5D%0A%20%20%20%20%24%24%0A%0A%20%20%20%20with%20the%20two%20**mass%20combinations**%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cboxed%7B%5C%3B%5Cmathcal%7BM%7D%3D%5Cfrac%7B(m_1%20m_2)%5E%7B3%2F5%7D%7D%7B(m_1%2Bm_2)%5E%7B1%2F5%7D%7D%5C%3B%7D%0A%20%20%20%20%5Cqquad%5Cqquad%0A%20%20%20%20%5Cboxed%7B%5C%3B%5Ceta%3D%5Cfrac%7Bm_1%20m_2%7D%7B(m_1%2Bm_2)%5E%7B2%7D%7D%5C%3B%7D%0A%20%20%20%20%24%24%0A%0A%20%20%20%20the%20**chirp%20mass**%20%24%5Cmathcal%7BM%7D%24%20and%20the%20**symmetric%20mass%20ratio**%20%24%5Ceta%24%0A%20%20%20%20(which%20runs%20from%20%240.25%24%20at%20equal%20mass%20down%20toward%20%240%24%20as%20the%20masses%20become%0A%20%20%20%20very%20unequal).%0A%0A%20%20%20%20**Which%20parameter%20dominates%20where%3A**%0A%0A%20%20%20%20-%20**Term%201**%20carries%20*only*%20%24%5Cmathcal%7BM%7D%24.%20The%20chirp%20mass%20sets%20the%20overall%0A%20%20%20%20%20%20rate%20of%20the%20sweep%3B%20it%20is%20by%20far%20the%20best-measured%20parameter.%0A%20%20%20%20-%20**Term%202**%20is%20where%20the%20**mass%20ratio**%20(%24%5Ceta%24)%20first%20appears%20(1PN).%0A%20%20%20%20-%20**Term%203**%20is%20where%20**spin**%20first%20appears%2C%20through%20%24%5Cbeta%24%20(1.5PN).%0A%20%20%20%20-%20**Term%204**%20brings%20in%20the%20spin-spin%20coupling%20%24%5Csigma%24%20(2PN).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20---%0A%20%20%20%20%23%23%202.%20Where%20spin%20enters%3A%20%24%5Cbeta%24%20and%20%24%5Csigma%24%0A%0A%20%20%20%20The%20two%20spin%20parameters%20in%20the%20chirp%20equation%20are%20the%20**spin-orbit**%20(%24%5Cbeta%24%2C%0A%20%20%20%201.5PN)%20and%20**spin-spin**%20(%24%5Csigma%24%2C%202PN)%20couplings%3A%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cbeta%3D%5Csum_%7Bi%3D1%7D%5E%7B2%7D%5Cleft%5B%5Cleft(%5Cfrac%7B113%7D%7B12%7D%5Cfrac%7Bm_i%5E%7B2%7D%7D%7BM%5E%7B2%7D%7D%0A%20%20%20%20%2B%5Cfrac%7B25%7D%7B4%7D%5Ceta%5Cright)%5Cvec%7B%5Cchi%7D_i%5Ccdot%5Chat%20L%5Cright%5D%0A%20%20%20%20%5Cqquad%5Ctext%7B(spin-orbit)%7D%0A%20%20%20%20%24%24%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Csigma%3D%5Cfrac%7B%5Ceta%7D%7B48%7D%5CBig%5B-247%5C%2C(%5Cvec%7B%5Cchi%7D_1%5Ccdot%5Cvec%7B%5Cchi%7D_2)%0A%20%20%20%20%2B721%5C%2C(%5Cvec%7B%5Cchi%7D_1%5Ccdot%5Chat%20L)(%5Cvec%7B%5Cchi%7D_2%5Ccdot%5Chat%20L)%5CBig%5D%0A%20%20%20%20%5Cqquad%5Ctext%7B(spin-spin)%7D%0A%20%20%20%20%24%24%0A%0A%20%20%20%20Here%20%24%5Cvec%5Cchi_i%3D%5Cvec%20S_i%2Fm_i%5E%7B2%7D%24%20is%20the%20**dimensionless%20spin**%20of%20body%20%24i%24%0A%20%20%20%20(with%20%24%7C%5Cvec%5Cchi_i%7C%5Cle%201%24)%2C%20and%20%24%5Chat%20L%24%20is%20the%20direction%20of%20the%20orbital%0A%20%20%20%20angular%20momentum.%0A%0A%20%20%20%20-%20In%20%24%5Cbeta%24%2C%20every%20spin%20appears%20**only**%20as%20%24%5Cvec%5Cchi_i%5Ccdot%5Chat%20L%24%3A%20the%0A%20%20%20%20%20%20component%20*along*%20%24%5Chat%20L%24.%20The%20spin-orbit%20term%20is%20completely%20**blind%20to%0A%20%20%20%20%20%20in-plane%20spin**.%20Only%20aligned%20spin%20changes%20the%20sweep%20at%201.5PN.%0A%20%20%20%20-%20In%20%24%5Csigma%24%20there%20is%20an%20extra%20piece%2C%20%24%5Cvec%5Cchi_1%5Ccdot%5Cvec%5Cchi_2%24%20%E2%80%94%20the%0A%20%20%20%20%20%20**full**%203-D%20dot%20product.%20This%20one%20*does*%20feel%20in-plane%20spin%2C%20but%20only%0A%20%20%20%20%20%20**quadratically**%20and%20only%20at%20**2PN**%20(a%20small%2C%20higher-order%20effect).%0A%0A%20%20%20%20So%20of%20the%20six%20numbers%20in%20%24(%5Cvec%5Cchi_1%2C%5Cvec%5Cchi_2)%24%2C%20the%20chirp%20mostly%20cares%0A%20%20%20%20about%20the%20aligned%20projections%2C%20and%20only%20weakly%20about%20the%20rest.%20That%20is%20what%0A%20%20%20%20motivates%20the%20next%20section.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20---%0A%20%20%20%20%23%23%203.%20From%20two%20component%20spins%20to%20%24%5Cchi_%7B%5Crm%20eff%7D%24%20and%20%24%5Cchi_p%24%0A%0A%20%20%20%20Each%20black%20hole%20carries%20a%20spin%20vector%20%24%5Cvec%5Cchi_i%24%20(magnitude%20%24%5Cchi_i%5Cle%201%24%2C%0A%20%20%20%20tilt%20%24%5Ctheta_i%24%20from%20%24%5Chat%20L%24).%20That%20is%20**four**%20numbers%20here%20%E2%80%94%20%24%5Cchi_1%2C%0A%20%20%20%20%5Ctheta_1%2C%5Cchi_2%2C%5Ctheta_2%24%20%E2%80%94%20and%20they%20are%20exactly%20the%20explorer's%20spin%20sliders.%0A%20%20%20%20Every%20setting%20of%20them%20is%20physical%20by%20construction.%20The%20waveform%2C%20though%2C%0A%20%20%20%20responds%20mainly%20to%20**two%20combinations**%20built%20from%20them%2C%20and%20those%20are%20what%0A%20%20%20%20LIGO-Virgo-KAGRA%20also%20report%20in%20their%20catalogues.%0A%0A%20%20%20%20Split%20each%20spin%20into%20its%20part%20**along**%20%24%5Chat%20L%24%20and%20its%20part%20**in%20the%20plane**%3A%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cchi_%7Bi%5Cparallel%7D%3D%5Cchi_i%5Ccos%5Ctheta_i%20%5Cquad(%5Ctext%7Baligned%7D)%2C%0A%20%20%20%20%5Cqquad%0A%20%20%20%20%5Cchi_%7Bi%5Cperp%7D%3D%5Cchi_i%5Csin%5Ctheta_i%20%5Cquad(%5Ctext%7Bin-plane%7D).%0A%20%20%20%20%24%24%0A%0A%20%20%20%20**Effective%20(inspiral)%20spin**%20%E2%80%94%20the%20mass-weighted%20aligned%20spin%3A%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cboxed%7B%5C%3B%5Cchi_%7B%5Crm%20eff%7D%0A%20%20%20%20%3D%5Cfrac%7Bm_1%5C%2C%5Cchi_%7B1%5Cparallel%7D%2Bm_2%5C%2C%5Cchi_%7B2%5Cparallel%7D%7D%7Bm_1%2Bm_2%7D%5C%3B%7D%0A%20%20%20%20%5Cqquad%20-1%5Cle%5Cchi_%7B%5Crm%20eff%7D%5Cle%201%20.%0A%20%20%20%20%24%24%0A%0A%20%20%20%20This%20is%20the%20combination%20sitting%20inside%20%24%5Cbeta%24%3B%20it%20is%20the%20**best-measured**%0A%20%20%20%20spin%20quantity.%0A%0A%20%20%20%20**Precession%20spin**%20%E2%80%94%20how%20much%20spin%20lies%20in%20the%20orbital%20plane.%20Here%20the%20two%0A%20%20%20%20conventions%20matter%2C%20and%20they%20answer%20the%20%22does%20%24%5Cchi_p%24%20go%20up%20to%202%3F%22%20question%3A%0A%0A%20%20%20%20%24%24%0A%20%20%20%20%5Cchi_p%3D%5Cchi_%7B1%5Cperp%7D%2Bk%5C%2C%5Cchi_%7B2%5Cperp%7D%5Cin%5B0%2C2%5D%0A%20%20%20%20%24%24%0A%0A%20%20%20%20with%20%24k%3D%5Cdfrac%7Bq(4q%2B3)%7D%7B4%2B3q%7D%24%20and%20%24q%3Dm_2%2Fm_1%5Cle%201%24%20(so%20the%20*lighter*%20body's%0A%20%20%20%20in-plane%20spin%20is%20down-weighted).%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20---%0A%20%20%20%20%23%23%204.%20Interactive%20explorer%0A%0A%20%20%20%20It's%20time%20to%20play%20around%20with%20the%20waveform%20and%20explore%20how%20different%20binary%20properties%20shape%20the%20waveform!%0A%0A%20%20%20%20Make%20notes%20about%20what%20happens%2C%20e.g.%20when%20chirp%20mass%20increases%2C%20what%20do%20you%20observe%3F%0A%20%20%20%20What%20about%20spin%20tilts%3F%20etc.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(math%2C%20mo)%3A%0A%20%20%20%20%23%20----%20SHARED%20STATE%20----------------------------------------------------%0A%20%20%20%20%23%20One%20source%20of%20truth%20for%20every%20control.%20A%20named%20slider%20block%20is%20rendered%0A%20%20%20%20%23%20above%20each%20plot%3B%20every%20block%20is%20wired%20to%20THESE%20values%2C%20so%20moving%20any%0A%20%20%20%20%23%20slider%20anywhere%20updates%20the%20whole%20notebook%20and%20every%20plot%20recomputes.%0A%20%20%20%20%23%0A%20%20%20%20%23%20marimo%20can%20only%20track%20UI%20elements%20bound%20to%20GLOBAL%20variables%2C%20so%20each%0A%20%20%20%20%23%20block%20below%20assigns%20its%20sliders%20to%20globals%20(prefixes%20a_%2C%20b_%2C%20c_)%20rather%0A%20%20%20%20%23%20than%20hiding%20them%20inside%20a%20helper%20function.%0A%20%20%20%20%23%0A%20%20%20%20%23%20Mass%20sliders%3A%20chirp%20mass%20(M-cal)%20and%20mass%20ratio%20q%20%3D%20m2%2Fm1%20(%3C%3D1).%0A%20%20%20%20%23%20Spin%20sliders%3A%20the%20TWO%20component%20spins%20as%20magnitude%20%2B%20tilt%2C%0A%20%20%20%20%23%20%20%20(chi1%2C%20theta1)%20for%20the%20heavier%20body%2C%20(chi2%2C%20theta2)%20for%20the%20lighter.%0A%20%20%20%20%23%20The%20effective%20spins%20chi_eff%20and%20chi_p%20are%20DERIVED%20and%20shown%20below.%0A%20%20%20%20get_Mc%2C%20set_Mc%20%3D%20mo.state(30.2)%20%20%20%20%20%20%20%23%20chirp%20mass%20%5BM_sun%5D%20%20(36%2B29%20default)%0A%20%20%20%20get_q%2C%20set_q%20%3D%20mo.state(0.81)%20%20%20%20%20%20%20%20%20%23%20mass%20ratio%20m2%2Fm1%20in%20(0%2C%201%5D%0A%20%20%20%20get_dist%2C%20set_dist%20%3D%20mo.state(410.0)%0A%20%20%20%20get_chi1%2C%20set_chi1%20%3D%20mo.state(0.0)%20%20%20%20%23%20spin%20magnitude%20of%20heavier%20body%2C%200..1%0A%20%20%20%20get_th1%2C%20set_th1%20%3D%20mo.state(0.0)%20%20%20%20%20%20%23%20its%20tilt%20from%20L%20%5Bdeg%5D%2C%200..180%0A%20%20%20%20get_chi2%2C%20set_chi2%20%3D%20mo.state(0.0)%20%20%20%20%23%20spin%20magnitude%20of%20lighter%20body%2C%200..1%0A%20%20%20%20get_th2%2C%20set_th2%20%3D%20mo.state(0.0)%20%20%20%20%20%20%23%20its%20tilt%20from%20L%20%5Bdeg%5D%0A%20%20%20%20get_nterms%2C%20set_nterms%20%3D%20mo.state(4)%0A%0A%20%20%20%20def%20masses_from(Mc%2C%20q)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Component%20masses%20from%20chirp%20mass%20and%20mass%20ratio%20q%20%3D%20m2%2Fm1%20(%3C%3D1).%0A%0A%20%20%20%20%20%20%20%20eta%20%3D%20q%2F(1%2Bq)%5E2%20%2C%20%20M_total%20%3D%20Mc%20%2F%20eta%5E(3%2F5)%20%2C%20%20m1%20%3D%20M%2F(1%2Bq)%2C%20m2%20%3D%20M%20q%2F(1%2Bq).%0A%20%20%20%20%20%20%20%20m1%20(heavier)%20%3E%3D%20m2%20(lighter).%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20eta%20%3D%20q%20%2F%20(1.0%20%2B%20q)%20**%202%0A%20%20%20%20%20%20%20%20M%20%3D%20Mc%20%2F%20eta%20**%200.6%0A%20%20%20%20%20%20%20%20return%20M%20%2F%20(1.0%20%2B%20q)%2C%20M%20*%20q%20%2F%20(1.0%20%2B%20q)%0A%0A%20%20%20%20def%20spin_params(m1%2C%20m2%2C%20chi1%2C%20th1_deg%2C%20chi2%2C%20th2_deg)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Two%20component%20spins%20-%3E%20the%20combinations%20the%20waveform%20responds%20to.%0A%0A%20%20%20%20%20%20%20%20Each%20spin%20i%20has%20magnitude%20chi_i%20and%20tilt%20theta_i%20from%20L%3A%0A%20%20%20%20%20%20%20%20%20%20aligned%20%20%20%20chi_i%7C%7C%20%20%20%3D%20chi_i%20cos(theta_i)%0A%20%20%20%20%20%20%20%20%20%20in-plane%20%20%20chi_i_perp%20%3D%20chi_i%20sin(theta_i)%0A%0A%20%20%20%20%20%20%20%20chi_eff%20%20%3D%20(m1%20chi1%7C%7C%20%2B%20m2%20chi2%7C%7C)%20%2F%20M%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B-1%2C%201%5D%0A%20%20%20%20%20%20%20%20chi_p%20%20%20%20%3D%20max(chi1_perp%2C%20k%20q%20chi2_perp)%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B0%2C%201%5D%20%20(Schmidt%2B2015)%0A%20%20%20%20%20%20%20%20chi_p%5Egen%20%3D%20chi1_perp%20%2B%20k%20q%20chi2_perp%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5B0%2C%202%5D%20%20(generalized)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20with%20k%20q%20%3D%20q(4q%2B3)%2F(4%2B3q)%2C%20%20q%20%3D%20m2%2Fm1%20%3C%3D%201%0A%20%20%20%20%20%20%20%20sigma%20%20%20%20%3D%20eta%2F48%20(474%20chi1%7C%7C%20chi2%7C%7C%20%20-%20%20247%20chi1_perp%20chi2_perp)%20%20%20(2PN%2C%20Dphi%3D0)%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20M%20%3D%20m1%20%2B%20m2%0A%20%20%20%20%20%20%20%20eta%20%3D%20m1%20*%20m2%20%2F%20M**2%0A%20%20%20%20%20%20%20%20c1par%2C%20c2par%20%3D%20chi1%20*%20math.cos(math.radians(th1_deg))%2C%20chi2%20*%20math.cos(math.radians(th2_deg))%0A%20%20%20%20%20%20%20%20c1perp%2C%20c2perp%20%3D%20chi1%20*%20math.sin(math.radians(th1_deg))%2C%20chi2%20*%20math.sin(math.radians(th2_deg))%0A%20%20%20%20%20%20%20%20chi_eff%20%3D%20(m1%20*%20c1par%20%2B%20m2%20*%20c2par)%20%2F%20M%0A%20%20%20%20%20%20%20%20q%20%3D%20m2%20%2F%20m1%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20%3C%3D%201%2C%20body%201%20heavier%0A%20%20%20%20%20%20%20%20k%20%3D%20q%20*%20(4%20*%20q%20%2B%203)%20%2F%20(4%20%2B%203%20*%20q)%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20weight%20on%20lighter%20body's%20in-plane%20spin%0A%20%20%20%20%20%20%20%20chi_p_std%20%3D%20max(c1perp%2C%20k%20*%20c2perp)%20%20%20%20%20%20%20%20%20%20%20%23%20standard%20(LIGO)%2C%200..1%0A%20%20%20%20%20%20%20%20chi_p_gen%20%3D%20c1perp%20%2B%20k%20*%20c2perp%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20generalized%20(2-spin)%2C%200..2%0A%20%20%20%20%20%20%20%20sigma%20%3D%20eta%20%2F%2048%20*%20(474%20*%20c1par%20*%20c2par%20-%20247%20*%20c1perp%20*%20c2perp)%0A%20%20%20%20%20%20%20%20return%20dict(chi_eff%3Dchi_eff%2C%20chi_p_std%3Dchi_p_std%2C%20chi_p_gen%3Dchi_p_gen%2C%20sigma%3Dsigma)%0A%0A%20%20%20%20def%20derived_md(Mc%2C%20q%2C%20chi1%2C%20th1%2C%20chi2%2C%20th2)%3A%0A%20%20%20%20%20%20%20%20%22%22%22Markdown%20readout%20of%20the%20derived%20quantities%20(no%20UI%20elements).%22%22%22%0A%20%20%20%20%20%20%20%20m1%2C%20m2%20%3D%20masses_from(Mc%2C%20q)%0A%20%20%20%20%20%20%20%20s%20%3D%20spin_params(m1%2C%20m2%2C%20chi1%2C%20th1%2C%20chi2%2C%20th2)%0A%20%20%20%20%20%20%20%20return%20mo.md(%0A%20%20%20%20%20%20%20%20%20%20%20%20rf%22**Derived**%20%26nbsp%3B%20%24m_1%3D%7Bm1%3A.1f%7D%5C%2CM_%5Codot%24%20(heavier)%2C%20%26nbsp%3B%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20rf%22%24m_2%3D%7Bm2%3A.1f%7D%5C%2CM_%5Codot%24%20(lighter)%20%26nbsp%3B%7C%26nbsp%3B%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20rf%22%24%5Cchi_%7B%7B%5Crm%20eff%7D%7D%3D%7Bs%5B'chi_eff'%5D%3A%2B.2f%7D%24%20%26nbsp%3B%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20rf%22%24%5Cchi_p%3D%7Bs%5B'chi_p_std'%5D%3A.2f%7D%24%20(max-def%2C%20%24%5Cle%201%24)%2C%20%26nbsp%3B%20%22%0A%20%20%20%20%20%20%20%20%20%20%20%20rf%22%24%5Cchi_p%20%3D%7Bs%5B'chi_p_gen'%5D%3A.2f%7D%24%20%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20derived_md%2C%0A%20%20%20%20%20%20%20%20get_Mc%2C%0A%20%20%20%20%20%20%20%20get_chi1%2C%0A%20%20%20%20%20%20%20%20get_chi2%2C%0A%20%20%20%20%20%20%20%20get_dist%2C%0A%20%20%20%20%20%20%20%20get_nterms%2C%0A%20%20%20%20%20%20%20%20get_q%2C%0A%20%20%20%20%20%20%20%20get_th1%2C%0A%20%20%20%20%20%20%20%20get_th2%2C%0A%20%20%20%20%20%20%20%20masses_from%2C%0A%20%20%20%20%20%20%20%20set_Mc%2C%0A%20%20%20%20%20%20%20%20set_chi1%2C%0A%20%20%20%20%20%20%20%20set_chi2%2C%0A%20%20%20%20%20%20%20%20set_dist%2C%0A%20%20%20%20%20%20%20%20set_q%2C%0A%20%20%20%20%20%20%20%20set_th1%2C%0A%20%20%20%20%20%20%20%20set_th2%2C%0A%20%20%20%20%20%20%20%20spin_params%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(%0A%20%20%20%20get_Mc%2C%0A%20%20%20%20get_chi1%2C%0A%20%20%20%20get_chi2%2C%0A%20%20%20%20get_dist%2C%0A%20%20%20%20get_q%2C%0A%20%20%20%20get_th1%2C%0A%20%20%20%20get_th2%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20set_Mc%2C%0A%20%20%20%20set_chi1%2C%0A%20%20%20%20set_chi2%2C%0A%20%20%20%20set_dist%2C%0A%20%20%20%20set_q%2C%0A%20%20%20%20set_th1%2C%0A%20%20%20%20set_th2%2C%0A)%3A%0A%20%20%20%20a_Mc%20%3D%20mo.ui.slider(1.0%2C%2070.0%2C%20value%3Dget_Mc()%2C%20on_change%3Dset_Mc%2C%20step%3D0.1%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24%5Cmathcal%7BM%7D%24%20%5BM%24_%5Codot%24%5D%20(chirp%20mass)%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_q%20%3D%20mo.ui.slider(0.10%2C%201.0%2C%20value%3Dget_q()%2C%20on_change%3Dset_q%2C%20step%3D0.01%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24q%3Dm_2%2Fm_1%24%20(mass%20ratio)%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_dist%20%3D%20mo.ui.slider(40.0%2C%202000.0%2C%20value%3Dget_dist()%2C%20on_change%3Dset_dist%2C%20step%3D10.0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24D_L%24%20%5BMpc%5D%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_chi1%20%3D%20mo.ui.slider(0.0%2C%200.99%2C%20value%3Dget_chi1()%2C%20on_change%3Dset_chi1%2C%20step%3D0.01%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24%5Cchi_1%24%20(heavier)%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_th1%20%3D%20mo.ui.slider(0.0%2C%20180.0%2C%20value%3Dget_th1()%2C%20on_change%3Dset_th1%2C%20step%3D5.0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24%5Ctheta_1%24%20%5Bdeg%5D%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_chi2%20%3D%20mo.ui.slider(0.0%2C%200.99%2C%20value%3Dget_chi2()%2C%20on_change%3Dset_chi2%2C%20step%3D0.01%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24%5Cchi_2%24%20(lighter)%22%2C%20show_value%3DTrue)%0A%20%20%20%20a_th2%20%3D%20mo.ui.slider(0.0%2C%20180.0%2C%20value%3Dget_th2()%2C%20on_change%3Dset_th2%2C%20step%3D5.0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Dr%22%24%5Ctheta_2%24%20%5Bdeg%5D%22%2C%20show_value%3DTrue)%0A%20%20%20%20return%20a_Mc%2C%20a_chi1%2C%20a_chi2%2C%20a_dist%2C%20a_q%2C%20a_th1%2C%20a_th2%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20a_Mc%2C%0A%20%20%20%20a_chi1%2C%0A%20%20%20%20a_chi2%2C%0A%20%20%20%20a_dist%2C%0A%20%20%20%20a_q%2C%0A%20%20%20%20a_th1%2C%0A%20%20%20%20a_th2%2C%0A%20%20%20%20derived_md%2C%0A%20%20%20%20get_Mc%2C%0A%20%20%20%20get_chi1%2C%0A%20%20%20%20get_chi2%2C%0A%20%20%20%20get_q%2C%0A%20%20%20%20get_th1%2C%0A%20%20%20%20get_th2%2C%0A%20%20%20%20mo%2C%0A)%3A%0A%20%20%20%20_row1%20%3D%20mo.hstack(%5Ba_Mc%2C%20a_q%2C%20a_dist%5D%2C%20justify%3D%22start%22%2C%20gap%3D1.0)%0A%20%20%20%20_row2%20%3D%20mo.hstack(%5Ba_chi1%2C%20a_th1%2C%20a_chi2%2C%20a_th2%5D%2C%20justify%3D%22start%22%2C%20gap%3D1.0)%0A%20%20%20%20_info%20%3D%20derived_md(get_Mc()%2C%20get_q()%2C%20get_chi1()%2C%20get_th1()%2C%20get_chi2()%2C%20get_th2())%0A%20%20%20%20_controls%20%3D%20mo.vstack(%5B_row1%2C%20_row2%2C%20_info%5D)%0A%20%20%20%20_controls%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(%0A%20%20%20%20build_waveform%2C%0A%20%20%20%20get_Mc%2C%0A%20%20%20%20get_chi1%2C%0A%20%20%20%20get_chi2%2C%0A%20%20%20%20get_dist%2C%0A%20%20%20%20get_nterms%2C%0A%20%20%20%20get_q%2C%0A%20%20%20%20get_th1%2C%0A%20%20%20%20get_th2%2C%0A%20%20%20%20masses_from%2C%0A%20%20%20%20spin_params%2C%0A)%3A%0A%20%20%20%20_m1%2C%20_m2%20%3D%20masses_from(get_Mc()%2C%20get_q())%0A%20%20%20%20_s%20%3D%20spin_params(_m1%2C%20_m2%2C%20get_chi1()%2C%20get_th1()%2C%20get_chi2()%2C%20get_th2())%0A%20%20%20%20wf%20%3D%20build_waveform(_m1%2C%20_m2%2C%20get_dist()%2C%20int(get_nterms())%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_s%5B%22chi_eff%22%5D%2C%20_s%5B%22chi_p_gen%22%5D%2C%20_s%5B%22sigma%22%5D)%0A%20%20%20%20return%20(wf%2C)%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(F_LOW%2C%20T_BEFORE%2C%20YLIM_FREQ%2C%20YLIM_STRAIN%2C%20np%2C%20plt%2C%20wf)%3A%0A%20%20%20%20_t%2C%20_h%2C%20_env%20%3D%20wf%5B%22t%22%5D%2C%20wf%5B%22h%22%5D%2C%20wf%5B%22env%22%5D%0A%20%20%20%20_tin%2C%20_Fin%20%3D%20wf%5B%22tin%22%5D%2C%20wf%5B%22Fin%22%5D%20%20%20%20%20%20%20%20%20%20%23%20inspiral%20only%20(t%20%3C%3D%200)%0A%0A%20%20%20%20%23%20time%20at%20which%20the%20signal%20climbs%20into%20the%20detector%20band%20(f%20%3D%20F_LOW)%0A%20%20%20%20_t_low%20%3D%20float(np.interp(F_LOW%2C%20_Fin%2C%20_tin))%0A%0A%20%20%20%20_fig%2C%20(_ax1%2C%20_ax2)%20%3D%20plt.subplots(2%2C%201%2C%20figsize%3D(8.2%2C%205.3)%2C%20sharex%3DTrue)%0A%0A%20%20%20%20%23%20----%20strain%20(with%20precession-modulated%20envelope%20overlaid)%20----%0A%20%20%20%20_ax1.axvspan(-T_BEFORE%2C%20_t_low%2C%20color%3D%22grey%22%2C%20alpha%3D0.5%2C%20lw%3D0)%0A%20%20%20%20_ax1.axvline(0%2C%20color%3D%22%23666%22%2C%20lw%3D0.8%2C%20ls%3D%22--%22)%0A%20%20%20%20_ax1.plot(_t%2C%20_h%20*%201e21%2C%20lw%3D0.6%2C%20color%3D%22%231b9e77%22)%0A%20%20%20%20_ax1.plot(_t%2C%20_env%20*%201e21%2C%20lw%3D0.9%2C%20color%3D%22%237570b3%22%2C%20alpha%3D0.9)%0A%20%20%20%20_ax1.plot(_t%2C%20-_env%20*%201e21%2C%20lw%3D0.9%2C%20color%3D%22%237570b3%22%2C%20alpha%3D0.9)%0A%20%20%20%20_ax1.set_ylabel(%22strain%20%20%24h(t)%5C%5C%3B%2F%5C%5C%3B10%5E%7B-21%7D%24%22)%0A%20%20%20%20_ax1.set_ylim(-YLIM_STRAIN%2C%20YLIM_STRAIN)%0A%20%20%20%20_ax1.set_title(%22Inspiral%20chirp%5Cn%20%20grey%20%3D%20below%20band%2C%20purple%20%3D%20amplitude%20envelope%22)%0A%20%20%20%20_ax1.grid(alpha%3D0.2)%0A%0A%20%20%20%20%23%20----%20frequency%3A%20INSPIRAL%20ONLY%2C%20nothing%20after%20merger%20----%0A%20%20%20%20_ax2.axvspan(-T_BEFORE%2C%20_t_low%2C%20color%3D%22grey%22%2C%20alpha%3D0.5%2C%20lw%3D0)%0A%20%20%20%20_ax2.axvline(0%2C%20color%3D%22%23666%22%2C%20lw%3D0.8%2C%20ls%3D%22--%22)%0A%20%20%20%20_ax2.axhline(F_LOW%2C%20color%3D%22grey%22%2C%20lw%3D0.8%2C%20ls%3D%22%3A%22)%0A%20%20%20%20_ax2.plot(_tin%2C%20_Fin%2C%20lw%3D1.6%2C%20color%3D%22%23d95f02%22)%0A%20%20%20%20_ax2.text(-T_BEFORE%20*%200.98%2C%20F_LOW%20%2B%206%2C%20f%22low-f%20cut%20%20(%7BF_LOW%3A.0f%7D%20Hz)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20color%3D%22grey%22%2C%20fontsize%3D8%2C%20va%3D%22bottom%22)%0A%20%20%20%20_ax2.text(0%2C%20YLIM_FREQ%20*%200.92%2C%20%22merger%22%2C%20color%3D%22%23666%22%2C%20fontsize%3D8%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20ha%3D%22right%22%2C%20va%3D%22top%22%2C%20rotation%3D90)%0A%20%20%20%20_ax2.set_ylabel(%22GW%20freq%20%5BHz%5D%22)%0A%20%20%20%20_ax2.set_xlabel(%22time%20from%20merger%20%5Bs%5D%22)%0A%20%20%20%20_ax2.set_ylim(0%2C%20YLIM_FREQ)%0A%20%20%20%20_ax2.grid(alpha%3D0.2)%0A%0A%20%20%20%20_ax1.set_xlim(-T_BEFORE%2C%200)%0A%20%20%20%20_fig.tight_layout()%0A%20%20%20%20_fig%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "read",
+            "version": "0.17.6",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": false, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>
